@@ -1,0 +1,6 @@
+@VolunteerApp.API_HostAddress = http://localhost:5190
+
+GET {{VolunteerApp.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
