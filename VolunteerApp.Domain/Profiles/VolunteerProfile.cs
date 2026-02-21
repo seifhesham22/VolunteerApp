@@ -12,14 +12,14 @@ namespace VolunteerApp.Domain.Profiles
     public class VolunteerProfile : BaseEntity
     {
         public Guid UserId { get; private set; }
-        public string Bio {  get; private set; } = string.Empty;
+        public string Bio { get; private set; } = string.Empty;
         public int TotalXp { get; private set; }
 
         private List<Review> _reviews = new();
         public IReadOnlyCollection<Review> Reviews => _reviews.AsReadOnly();
 
         private List<VolunteerTitle> _unlockedTitles = new();
-        public IReadOnlyCollection<VolunteerTitle> EarnedTitles => _unlockedTitles.AsReadOnly();  
+        public IReadOnlyCollection<VolunteerTitle> EarnedTitles => _unlockedTitles.AsReadOnly();
 
         public int level => (TotalXp / 100) + 1;
 
@@ -49,6 +49,5 @@ namespace VolunteerApp.Domain.Profiles
                     titleDefinitionId: titleId,
                     DateTime.UtcNow));
         }
-
     }
 }

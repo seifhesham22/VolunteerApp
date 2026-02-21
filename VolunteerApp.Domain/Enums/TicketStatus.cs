@@ -8,7 +8,8 @@ namespace VolunteerApp.Domain.Enums
     {
         Created = 0,
         Claimed = 1,
-        InProcess = 1,
-        Completed = 2,
+        Reported = 2,
+        InProcess = 3,
+        Completed = 4,
     }
 }
