@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VolunteerApp.Domain.Aggregates.UserAggregate;
 using VolunteerApp.Domain.CustomExceptions;
-using VolunteerApp.Domain.Enums;
+using VolunteerApp.Domain.Entities;
+using VolunteerApp.Domain.Gamefication;
 
-namespace VolunteerApp.Domain.Entities
+namespace VolunteerApp.Domain.Gamefication
 {
     public class TitleDefinition
     {
@@ -12,8 +14,8 @@ namespace VolunteerApp.Domain.Entities
         public string Name { get; private set; } = null!;
         public CriteriaType CriteriaType { get; private set; }
         public int RequiredValue { get; private set; }
-        public ServiceType ServiceFilter { get; private set; }
-        public string TitlePadge { get; private set; }
+        public ServiceType? ServiceFilter { get; private set; }
+        public string TitlePadge { get; private set; } = null!;
 
         private TitleDefinition() { }
 

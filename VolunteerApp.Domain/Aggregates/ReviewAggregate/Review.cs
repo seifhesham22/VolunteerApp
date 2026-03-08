@@ -2,20 +2,16 @@
 using System.Collections.Generic;
 using System.Reflection.Metadata;
 using System.Text;
+using VolunteerApp.Domain.Abstractions;
 using VolunteerApp.Domain.CustomExceptions;
 
-namespace VolunteerApp.Domain.Entities
+namespace VolunteerApp.Domain.Aggregates.ReviewAggregate
 {
-    public class Review
+    public class Review : BaseEntity, IAggregateRoot
     {
-        public int Id { get; set; } 
-        public Guid TicketId { get; set; }
         public Guid AuthorId { get; set; }
         public Guid VolunteerId { get;set; }
         public string Content { get; set; } = null!;
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public DateTime? DeletedAt { get; set; }
 
         private Review() { }
         public Review(
@@ -24,7 +20,6 @@ namespace VolunteerApp.Domain.Entities
             Guid volunteerId,
             string content)
         {
-            this.TicketId = ticketId;
             this.AuthorId = authorId;
             this.VolunteerId = volunteerId;
             this.Content = content;
