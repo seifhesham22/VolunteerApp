@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace VolunteerApp.Domain.Enums
+namespace VolunteerApp.Domain.Aggregates.TicketAggregate
 {
     public enum TicketStatus
     {

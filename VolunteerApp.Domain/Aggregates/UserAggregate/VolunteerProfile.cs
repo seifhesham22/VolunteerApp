@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
 using VolunteerApp.Domain.Abstractions;
+using VolunteerApp.Domain.Aggregates.ReviewAggregate;
 using VolunteerApp.Domain.CustomExceptions;
-using VolunteerApp.Domain.Entities;
-using VolunteerApp.Domain.Enums;
 
-namespace VolunteerApp.Domain.Profiles
+namespace VolunteerApp.Domain.Aggregates.UserAggregate
 {
     public class VolunteerProfile : BaseEntity
     {
@@ -18,18 +17,19 @@ namespace VolunteerApp.Domain.Profiles
         private List<Review> _reviews = new();
         public IReadOnlyCollection<Review> Reviews => _reviews.AsReadOnly();
 
-        private List<VolunteerTitle> _unlockedTitles = new();
-        public IReadOnlyCollection<VolunteerTitle> EarnedTitles => _unlockedTitles.AsReadOnly();
+        private readonly List<VolunteerAchievement> _achievements = new();
+        public IReadOnlyCollection<VolunteerAchievement> Achievements => _achievements.AsReadOnly();
 
         public int level => (TotalXp / 100) + 1;
 
         private VolunteerProfile() { }
 
-        public VolunteerProfile(string bio)
+        internal VolunteerProfile(Guid UserId, string bio)
         {
             this.Id = Guid.NewGuid();
             this.CreatedAt = DateTime.UtcNow;
             this.Bio = bio;
+            this.UserId = UserId;
         }
 
         public void AddExperience(int amount) => this.TotalXp += amount;
@@ -42,12 +42,11 @@ namespace VolunteerApp.Domain.Profiles
 
         public void AddTitle(int titleId)
         {
-            if (!_unlockedTitles.Any(t => t.titleDefinitionId == titleId))
-                _unlockedTitles.Add(
-                    new VolunteerTitle(
-                    userId: this.UserId,
-                    titleDefinitionId: titleId,
-                    DateTime.UtcNow));
+            if (!_achievements.Any(t => t.TitleDefinitionId == titleId))
+                _achievements.Add(
+                    new VolunteerAchievement(
+                    volunteerId: this.UserId,
+                    titleId: titleId));
         }
     }
 }

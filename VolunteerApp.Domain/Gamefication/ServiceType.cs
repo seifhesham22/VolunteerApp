@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using VolunteerApp.Domain.Abstractions;
 using VolunteerApp.Domain.CustomExceptions;
 
 namespace VolunteerApp.Domain.Entities
 {
-    public class ServiceType
+    public class ServiceType 
     {
         public int Id { get; private set; }
         public string Name { get; private set; } = null!;
@@ -25,11 +26,17 @@ namespace VolunteerApp.Domain.Entities
                 throw new DomainException("New service name can't be a null or empty!");
             Name = newName;
         }
-        public void DeActivate() => IsActive = false;
+        public void DeActivate()
+        {
+            IsActive = false;
+        }
         public void ReActivate()
         {
             if (!IsActive)
+            {
                 IsActive = true;
+            }
+
             else
                 throw new DomainException($"the service '{Name}' is active");
         }
